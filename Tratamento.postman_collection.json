@@ -1,0 +1,102 @@
+{
+	"info": {
+		"_postman_id": "4db82ee9-72d7-4228-b275-22e4b58a5b39",
+		"name": "Tratamento",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "38217213",
+		"_collection_link": "https://www.postman.com/elcio-vilonga/interface-web/collection/fffnf0a/tratamento?action=share&source=collection_link&creator=38217213"
+	},
+	"item": [
+		{
+			"name": "Busca Dados",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"let responseData=pm.response.json();\r",
+							"pm.collectionVariables.set(\"name\", responseData.results[0].name.first+ ' ' +responseData.results[0].name.last);\r",
+							"pm.collectionVariables.set(\"email\", responseData.results[0].email);\r",
+							"pm.collectionVariables.set(\"date\", responseData.results[0].dob.date);\r",
+							"pm.collectionVariables.set(\"age\", responseData.results[0].dob.age);"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://randomuser.me/api",
+					"protocol": "https",
+					"host": [
+						"randomuser",
+						"me"
+					],
+					"path": [
+						"api"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Cria Usuários",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"name\": \"{{name}}\",\r\n  \"email\": \"{{email}}\",\r\n  \"date\": \"{{date}}\",\r\n\t\"age\": \"{{age}}\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://postman-echo.com/post",
+					"protocol": "https",
+					"host": [
+						"postman-echo",
+						"com"
+					],
+					"path": [
+						"post"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"variable": [
+		{
+			"key": "email",
+			"value": ""
+		},
+		{
+			"key": "date",
+			"value": ""
+		},
+		{
+			"key": "age",
+			"value": ""
+		},
+		{
+			"key": "name",
+			"value": ""
+		}
+	]
+}
